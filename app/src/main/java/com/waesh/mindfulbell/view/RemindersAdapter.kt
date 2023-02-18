@@ -1,5 +1,6 @@
 package com.waesh.mindfulbell.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +14,15 @@ class RemindersAdapter(private val itemClickActions: ItemClickActions): ListAdap
 
     class ItemViewHolder(binding: ItemReminderViewBinding) : ViewHolder(binding.root){
         private val textView = binding.tvReminderText
-        private val chipEnabled = binding.chipEnabled
-        private val chipFavorite = binding.chipFavorite
+        val chipEnabled = binding.chipEnabled
+        val chipFavorite = binding.chipFavorite
         val clBottom = binding.clBottom
         val root = binding.root
 
         fun bind(reminder: Reminder){
             textView.text = reminder.body
-            chipEnabled.isActivated = reminder.enabled
-            chipFavorite.isActivated = reminder.favorite
+            chipEnabled.isChecked = reminder.enabled
+            chipFavorite.isChecked = reminder.favorite
         }
     }
 
@@ -32,6 +33,7 @@ class RemindersAdapter(private val itemClickActions: ItemClickActions): ListAdap
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(currentList[position])
+
         holder.root.setOnClickListener {
 
             when(holder.clBottom.visibility){
@@ -39,6 +41,14 @@ class RemindersAdapter(private val itemClickActions: ItemClickActions): ListAdap
                 View.VISIBLE -> holder.clBottom.visibility = View.GONE
             }
             itemClickActions.onClick(holder.adapterPosition, holder.clBottom.id)
+        }
+
+        holder.chipEnabled.setOnCheckedChangeListener { _, isChecked ->
+            itemClickActions.onEnabledChanged(currentList[position].id,isChecked)
+        }
+
+        holder.chipFavorite.setOnCheckedChangeListener{ _, isChecked ->
+            itemClickActions.onFavoriteChanged(currentList[position].id,isChecked)
         }
     }
 
@@ -56,5 +66,7 @@ class Comparator: DiffUtil.ItemCallback<Reminder>() {
 
 interface ItemClickActions {
     fun onClick(holderPosition: Int, viewId: Int)
+    fun onEnabledChanged(id: Int, enabled: Boolean)
+    fun onFavoriteChanged(id: Int, favorite: Boolean)
     fun onLongClick(reminder: Reminder, holderPosition: Int)
 }

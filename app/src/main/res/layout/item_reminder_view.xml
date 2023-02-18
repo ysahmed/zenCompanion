@@ -4,29 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:clickable="true"
+    android:elevation="10dp"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground">
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/iv_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/ic_checked"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_reminder_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:maxLines="3"
-            android:padding="@dimen/default_padding"
             android:layout_margin="@dimen/default_margin"
+            android:maxLines="2"
+            android:minLines="2"
+            android:padding="@dimen/default_padding"
             android:textColor="@color/black"
             android:textSize="@dimen/default_paragraph_text"
+            app:layout_constraintBottom_toTopOf="@id/cl_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/cl_bottom"
             tools:text="loreum epsumdfsdfsdf fsdfsdfsdf" />
 
 
@@ -50,28 +63,28 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_enabled"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_text_enabled"
-                    android:textSize="@dimen/default_paragraph_text"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                    android:textSize="@dimen/default_paragraph_text" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_favorite"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_text_favourite"
-                    android:textSize="@dimen/default_paragraph_text"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                    android:textSize="@dimen/default_paragraph_text" />
 
             </com.google.android.material.chip.ChipGroup>
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
                 android:backgroundTint="@color/white"
                 android:src="@drawable/ic_baseline_edit_24"
-                android:layout_margin="@dimen/default_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

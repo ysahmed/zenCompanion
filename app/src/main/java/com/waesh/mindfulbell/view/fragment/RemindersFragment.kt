@@ -20,7 +20,12 @@ import com.waesh.mindfulbell.viewmodel.RemindersViewModelFactory
 class RemindersFragment : Fragment() {
 
     private lateinit var binding: FragmentRemindersBinding
+    private val viewModel by viewModels<RemindersViewModel> {
+        RemindersViewModelFactory((requireActivity().application as MindfulApplication).repository)
+    }
+
     private lateinit var recyclerView: RecyclerView
+
     private val adapter = RemindersAdapter(object : ItemClickActions {
         private var newHolderPosition = -1 // -1 -> no item inflated
         private var oldHolderPosition = -1
@@ -39,15 +44,19 @@ class RemindersFragment : Fragment() {
             }
         }
 
+        override fun onEnabledChanged(id: Int, enabled: Boolean) {
+            viewModel.updateEnabledById(id, enabled)
+        }
+
+        override fun onFavoriteChanged(id: Int, favorite: Boolean) {
+            viewModel.updateFavoriteById(id, favorite)
+        }
+
         override fun onLongClick(reminder: Reminder, holderPosition: Int) {
             TODO("Not yet implemented")
         }
 
     })
-
-    private val viewModel by viewModels<RemindersViewModel> {
-        RemindersViewModelFactory((requireActivity().application as MindfulApplication).repository)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
