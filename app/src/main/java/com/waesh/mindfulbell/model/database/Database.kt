@@ -19,7 +19,9 @@ abstract class Database: RoomDatabase() {
                     context.applicationContext,
                     Database::class.java,
                     "database"
-                ).build()
+                )
+                    .createFromAsset("database.db")
+                    .build()
                 INSTANCE = instance
                 instance
             }

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.waesh.mindfulbell.R
 import com.waesh.mindfulbell.application.MindfulApplication
 import com.waesh.mindfulbell.databinding.FragmentAppSettingsBinding
+import com.waesh.mindfulbell.view.activity.MainActivity
 import com.waesh.mindfulbell.viewmodel.ApplicationViewModel
 import com.waesh.mindfulbell.viewmodel.ApplicationViewModelFactory
 
@@ -38,8 +39,14 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.cvReminders.setOnClickListener{
+            (activity as MainActivity).hideBottomNavigationView()
             it.findNavController().navigate(R.id.action_navigation_app_settings_to_remindersFragment)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).showBottomNavigationView()
     }
 
     override fun onDestroyView() {

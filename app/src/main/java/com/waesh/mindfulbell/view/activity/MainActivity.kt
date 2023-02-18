@@ -1,6 +1,7 @@
 package com.waesh.mindfulbell.view.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -37,4 +38,17 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    fun hideBottomNavigationView() {
+        binding.navView.clearAnimation()
+        binding.navView.animate().translationY(binding.navView.height.toFloat()).duration = 700
+        binding.navView.visibility = View.GONE
+    }
+
+    fun showBottomNavigationView() {
+        binding.navView.clearAnimation()
+        binding.navView.animate().translationY(0F).duration = 300
+        binding.navView.visibility = View.VISIBLE
+    }
+
 }

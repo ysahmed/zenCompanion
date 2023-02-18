@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.waesh.mindfulbell.model.database.Repository
+import com.waesh.mindfulbell.model.repository.Repository
 
 class ApplicationViewModel(private val repository: Repository): ViewModel() {
 

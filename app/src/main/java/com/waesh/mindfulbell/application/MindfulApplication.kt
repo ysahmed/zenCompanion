@@ -2,7 +2,7 @@ package com.waesh.mindfulbell.application
 
 import android.app.Application
 import com.waesh.mindfulbell.model.database.Database
-import com.waesh.mindfulbell.model.database.Repository
+import com.waesh.mindfulbell.model.repository.Repository
 
 class MindfulApplication: Application() {
 
